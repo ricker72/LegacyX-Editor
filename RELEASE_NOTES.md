@@ -4,10 +4,10 @@
 
 # 🗺️ LegacyX Editor — Release Notes
 
-### **v1.11.1 — AreaGen New-Map Center + GroundBrush CanDraw Parity + Planner E2E Anchors + Connector Certification**
+### **v1.11.9 — HUD Unificado Fijo: Single Bubble + Nombre/Barra Pantalla Sin Zoom**
 ### `Tibia 10.98` · `.NET 10` · `Windows Forms` · `C#` · `D3D11 / GDI+`
 
-[![Version](https://img.shields.io/badge/version-1.11.1-00D084?style=for-the-badge&logo=dotnet)](#)
+[![Version](https://img.shields.io/badge/version-1.11.9-00D084?style=for-the-badge&logo=dotnet)](#)
 [![Tibia](https://img.shields.io/badge/Tibia-10.98-1071CC?style=for-the-badge)](#)
 [![Runtime](https://img.shields.io/badge/runtime-.NET%2010%20Windows-512BD4?style=for-the-badge&logo=windows)](#)
 [![Language](https://img.shields.io/badge/language-C%23-239120?style=for-the-badge&logo=csharp)](#)
@@ -18,7 +18,7 @@
 > No second runtime · No C++ in production · No invented IDs · No vibe coding.
 > RME `hampusborgos/rme@da7152e` `source/` is the only external authority.
 
-**📅 Release Date:** `2026-09-07` &nbsp;|&nbsp; **📦 Distribution:** `Release-Latest/` (single build) &nbsp;|&nbsp; **🔖 Commit:** `1.11.1-areagen-center-groundbrush-canDraw-planner-e2e`
+**📅 Release Date:** `2026-09-08` &nbsp;|&nbsp; **📦 Distribution:** `Release-Latest/` (single build) &nbsp;|&nbsp; **🔖 Commit:** `1.11.9-hud-unificado-fijo`
 
 </div>
 
@@ -27,10 +27,26 @@
 ## 📑 Table of Contents
 
 - [✨ Executive Summary](#-executive-summary)
+- [🎯 Highlights v1.11.9](#-highlights-v1119)
+- [🎯 Highlights v1.11.8](#-highlights-v1118)
+- [🎯 Highlights v1.11.7](#-highlights-v1117)
+- [🎯 Highlights v1.11.6](#-highlights-v1116)
+- [🎯 Highlights v1.11.5](#-highlights-v1115)
+- [🎯 Highlights v1.11.4](#-highlights-v1114)
+- [🎯 Highlights v1.11.3](#-highlights-v1113)
+- [🎯 Highlights v1.11.2](#-highlights-v1112)
 - [🎯 Highlights v1.11.1](#-highlights-v1111)
 - [🎯 Highlights v1.11.0](#-highlights-v1110)
 - [🎯 Highlights v1.10.0](#-highlights-v1100)
 - [📋 Detailed Changelog](#-detailed-changelog)
+  - [1.11.9 — HUD Unificado Fijo: Single Bubble + Pantalla](#1119--hud-unificado-fijo-single-bubble--nombrebarra-pantalla-sin-zoom)
+  - [1.11.8 — Acerca de Goto Website](#1118--acerca-de-goto-website-pagina-oficial-legacyx)
+  - [1.11.7 — HUD NoClip + Barra Centrada + Bridge GPU](#1117--hud-noclip--barra-centrada--d3d11simulationbridge-concurrentqueue-gpu)
+  - [1.11.6 — Screenshot 2 HUD Adaptativo](#1116--screenshot-2-hud-nombres-adaptativos-22x3-bubble-10x10-sin-cuadro-azul-single)
+  - [1.11.5 — DAT Magic Effects/Missiles + Hunting + Corpse + Normalizer + HUD Fixed](#1115--dat-magic-effectsmissiles--god-mode-hunting--corpse-volatil--loot-otbnamenormalizer--npc-hud-fixed-12x12)
+  - [1.11.4 — NPC Bubble + Voice Viewport Boost](#1114--npc-bubble-single-right-under-hp--monster-voice-viewport-boost-anti-saturation)
+  - [1.11.3 — Creature Voices Fix (HasDetailedSimulation)](#1113--creature-voices-fix-hasdetailedsimulation-placeholder-enrichment)
+  - [1.11.2 — Creature Catalog Voices/Attacks Supplement](#1112--creature-catalog-voicesattacks-supplement-voice_attack_monsterxml-portable-merge)
   - [1.11.1 — AreaGen Center + GroundBrush + Planner E2E](#1111--areagen-center--groundbrush--planner-e2e)
   - [1.11.0 — Memory + Lazy + GIF + Creatures + NPC + Town + Full Sim](#1110--memory--lazy--gif--creatures--npc--town--full-sim)
   - [1.10.0 — Live Host Scale + Persistence + Firebase](#1100--live-host-scale--persistence--firebase--chat-neon-fix)
@@ -70,6 +86,325 @@
 | **Live Collaboration** | 🟢 Certified |
 
 ---
+
+
+
+
+
+
+## 🎯 Highlights v1.11.9
+
+<table>
+<tr>
+<td width="25%" align="center">
+
+### 🔹
+**Single Bubble**
+`NpcBubbleGifProvider` 1 `DrawImage` (sin doble sombra)
+
+</td>
+<td width="25%" align="center">
+
+### 🗺️
+**HUD Pantalla**
+`MapRenderer` sin HUD en `Scale(zoom)` — solo `MapViewport` overlay
+
+</td>
+<td width="25%" align="center">
+
+### 📏
+**Tamaño Fijo**
+`Bar 27x4`/`Font 7pt` * `EffectiveScale` (0.75-1.5), no `Zoom`
+
+</td>
+<td width="25%" align="center">
+
+### 🎯
+**Centro Fijo**
+`centerX = sx+pixelSize/2` `barX = centerX-barW/2` `bubble = nameX+ts.Width+3*scale`
+
+</td>
+</tr>
+</table>
+
+```diff
++ NpcBubbleGifProvider.Draw: 1 DrawImage (antes 2: x+1,y+1 + x,y) → sin doble burbuja
++ MapRenderer.RenderPlayer + DrawSimulatedCreatureInformation: vaciados — nombre/barra/bubble solo en MapViewport overlay (pantalla, no zoom)
++ MapViewport.RenderSimulationSpeechBubbles: único sitio HUD fijo EffectiveScale, barW=27*scale barH=4*scale gap=2*scale bubble 12*scale a derecha del nombre
+```
+
+## 🎯 Highlights v1.11.8
+
+<table>
+<tr>
+<td width="100%" align="center">
+
+### 🌐
+**Goto Website**
+`Acerca de → Goto Website F3` → `https://ricker72.github.io/legacyx/`
+
+</td>
+</tr>
+</table>
+
+```diff
+! Acerca de → Goto Website F3: https://github.com/opentibiabr/canary
++ Acerca de → Goto Website F3: https://ricker72.github.io/legacyx/ (Pagina Oficial LegacyX)
+# MainForm.cs:6446 Process.Start UseShellExecute true
+```
+
+## 🎯 Highlights v1.11.7
+
+<table>
+<tr>
+<td width="25%" align="center">
+
+### 📝
+**Texto NoClip**
+NoWrap|NoClip, sin corte con zoom
+
+</td>
+<td width="25%" align="center">
+
+### 📍
+**Barra Centrada**
+healthBarX/Y = screen + (32*zoom-bar)/2, -6*zoom
+
+</td>
+<td width="25%" align="center">
+
+### 🚀
+**Bridge GPU**
+ConcurrentQueue → ProcessAndRenderEffects en Main Thread D3D11
+
+</td>
+<td width="25%" align="center">
+
+### 🎨
+**DoubleBuffered**
+Viewport DoubleBuffer + camera float, sin parpadeo
+
+</td>
+</tr>
+</table>
+
+```diff
++ TibiaHudRenderer.RenderCreatureHUD_Fixed: worldX/worldY/cameraX/cameraY/zoom, bar 27*zoom centrado (32*zoom-bar)/2, textY=healthBarY-12*zoom, StringFormat NoWrap|NoClip
++ D3D11SimulationBridge: ConcurrentQueue<ActiveSimulationEffect> EnqueueMonsterAttack → ProcessAndRenderEffects en D3D11 Render (250ms missile, 90ms frame, ResolveEffectSprite)
++ DoubleBuffered=true + camera float/double para HUD sin saltos
+```
+
+## 🎯 Highlights v1.11.6
+
+<table>
+<tr>
+<td width="25%" align="center">
+
+### 🔤
+**Nombres 7pt Adaptativo**
+Clamp 0.8-1.15, ClearType, no distorsión
+
+</td>
+<td width="25%" align="center">
+
+### ❤️
+**Barra 22x3**
+Gap 2px bajo nombre, centrada 32px
+
+</td>
+<td width="25%" align="center">
+
+### 💬
+**Bubble 10x10**
+Blanca ... sin cuadro azul, a la derecha del nombre
+
+</td>
+<td width="25%" align="center">
+
+### 🎯
+**SINGLE**
+Overlay único, sin duplicación GDI/D3D11
+
+</td>
+</tr>
+</table>
+
+```diff
++ TibiaHudRenderer 7.0pt*scale Clamp 0.8-1.15 ClearTypeGridFit — nombre tamaño adaptativo, no grande/distorsionado, py-14*scale
++ Barra DrawSimulatedCreatureInformation 22x3 (antes 27x4) gap 2px bajo nombre, centrada (32-22)/2, py-4 fino, color GetHealthColor
++ Bubble NpcBubble 10x10 (antes 12x12) sin FillRectangle azul 40,80,255 — solo DrawNpcBubble blanca ... (screenshot 2), pos textX+width+4, textY-2, sigue lerp
++ Centralizado: MapRenderer bubble eliminado, MapViewport overlay único (HashSet bubbleDrawn) para GDI y D3D11, speech solo D3D11
+```
+
+## 🎯 Highlights v1.11.5
+
+<table>
+<tr>
+<td width="25%" align="center">
+
+### 🧱
+**DAT Effects/Missiles**
+175 Magic + 54 Missiles 10.98
+
+</td>
+<td width="25%" align="center">
+
+### ⚔️
+**God Hunting**
+HP 50-150, corpse volátil, loot #00A800/#0055FF
+
+</td>
+<td width="25%" align="center">
+
+### 🔍
+**OtbNameNormalizer**
+O(1) plural, "Clomp's"→"clomp head"
+
+</td>
+<td width="25%" align="center">
+
+### 🎯
+**NPC HUD Fixed**
+12x12 en px+10,py+1, barra 27x4 py-4
+
+</td>
+</tr>
+</table>
+
+```diff
++ DAT 10.98 — SimulationEffectData + LegacyXClientAssets.MagicEffects/DistanceMissiles poblados desde mismo BinaryReader que Items/Outfits (header 12 + skip categories), width/height/anim/spriteIds → LegacyXSimulationRenderer TickAndRender D3D11/GDI+
++ Hunting — IngameSimulation.HandleMonsterDeath corpse volátil SimulationWorldLayer(hash X,Y,Z) + SimulationTileMap, loot 1..100000 *IsRare, Poff 3, sangre 1, consola verde #00A800 / azul #0055FF, FloatingSimulationText Impact 9 + sombra
++ MonsterRaceManager — cache _loadedRaces, FindMonsterXmlPath recursivo + monsters.xml índice, Resolve via LegacyXItemDatabase O(1) normalizado, SimulationSpawnEngine HandleMonsterSpawnInSimulation → SpawnEngineCache
++ OtbNameNormalizer — ToLowerInvariant + StringBuilder a-z0-9, " -_,"→espacio, plural s failsafe, LegacyXItemDatabase RegisterItem/FindIdByName O(1)
++ HUD — TibiaHudRenderer.RenderNpcHUD_Fixed centralizado 12x12 px+10,py+1, barra px+3,py-4, nombre py-14, SINGLE (elimina duplicación GDI/D3D11)
+```
+
+## 🎯 Highlights v1.11.4
+
+<table>
+<tr>
+<td width="25%" align="center">
+
+### 💬
+**Bubble Single**
+Derecha bajo HP, sigue NPC
+
+</td>
+<td width="25%" align="center">
+
+### 📍
+**Cerca del Cuerpo**
+Pegada `bgX+w31+4`, `bgY+h4+2`
+
+</td>
+<td width="25%" align="center">
+
+### 🗣️
+**Voice Boost**
+Viewport+GOD, chasing ½ interval
+
+</td>
+<td width="25%" align="center">
+
+### 🛡️
+**Anti-Saturación**
+Máx. 3 voces/tick, global throttle
+
+</td>
+</tr>
+</table>
+
+```diff
++ NpcBubble — MapRenderer.cs:1740 + MapViewport.cs:1574 mueve gif 12x12 a bgX+w31+4 / bgY+h4+2 (derecha bajo barra 31x4), cerca del cuerpo, sigue lerp px/py; GDI+ y D3D11 mismo anclaje → single bubble sin duplicado/overlap con speech text
++ Monster Voice — IngameSimulation.cs:1204 UpdateVoices(godPos) effectiveInterval Interval/2 si chasing (mín 800) o *0.7 si en AwareRange (+10 chance), voces fuera de AwareRange pero dentro de viewport tickSet ahora también hablan (tickSet 8,6+2 margin), _voicesEmittedInCurrentTick máx 3 por Advance
++ Advance loop — UpdateVoices antes del gate AwareRange para que viewport no quede mudo; aggro/movimiento siguen gated
+```
+
+## 🎯 Highlights v1.11.3
+
+<table>
+<tr>
+<td width="25%" align="center">
+
+### 🧬
+**HasDetailedSimulation**
+Placeholder vs real data
+
+</td>
+<td width="25%" align="center">
+
+### 🗣️
+**Voices Unblocked**
+Real dir enriches creatures.xml
+
+</td>
+<td width="25%" align="center">
+
+### 📁
+**Legacy Dir Fallback**
+`LoadServerDataDirectory` + portable
+
+</td>
+<td width="25%" align="center">
+
+### 🛡️
+**No Hardcoded Paths**
+`C:\Users\samatha\...` removed
+
+</td>
+</tr>
+</table>
+
+```diff
++ HasDetailedSimulation — new bool flag: true only when SimulationConfig came from real per-creature XML/lua (monster/npc dir or voice_attack fallback), false for bundled creatures.xml/npcs.xml placeholder (name+looktype, Voices=null, 1 synthetic attack)
++ LoadCreatureFile / LoadCreatureLuaFile — skipExisting now checks HasDetailedSimulation; placeholder is enriched/replaced with real voices/attacks (outfit reused if file has no <look>), first detailed source wins
++ TryLoadVoiceAttackFallback — placeholder's synthetic single attack no longer counts as real; voices/attacks correctly filled from voice_attack_monster.xml
++ ApplyVoiceAttackFallback — extracted portable resolver (AppContext.BaseDirectory / CWD / AppDomain) and invoked from BOTH LoadFromPreferences AND LoadServerDataDirectory (legacy single-dir flow was mute before)
++ Hardcoded C:\Users\samatha\... (Kruger, G[10.91], absolute voice_attack/npcs.xml) removed — portable candidates only
+```
+
+## 🎯 Highlights v1.11.2
+
+<table>
+<tr>
+<td width="25%" align="center">
+
+### 🗣️
+**Voices/Attacks Merge**
+`voice_attack_monster.xml` supplement
+
+</td>
+<td width="25%" align="center">
+
+### 📁
+**Portable Resolve**
+`data/` + `data/data/` · no absolutes
+
+</td>
+<td width="25%" align="center">
+
+### 🛡️
+**Preference Authoritative**
+`Creatures.xml`/`npcs.xml` always primary
+
+</td>
+<td width="25%" align="center">
+
+### 🔀
+**Case-Insensitive Merge**
+Existing + fallback `voices`/`attacks`
+
+</td>
+</tr>
+</table>
+
+```diff
++ CreatureCatalog Supplement — data/voice_attack_monster.xml merges missing <voices>/<attacks> after preference/server load
++ ResolveVoiceAttackPath   — portable candidates: AppContext.BaseDirectory/data, data/data, CurrentDirectory/data, data/data, AppDomain.BaseDirectory/data
++ TryLoadVoiceAttackFallback — strips <?xml>/<!-- --> wraps <monsters>, case-insensitive name lookup, ParseSimulationConfig fallback, merges only when fallback richer (voices>count, attacks>count or single-melee→real)
++ LoadFromPreferences/LoadServerDataDirectory — Creatures.xml primary + lua skipExisting + voice_attack merge + bubbles; Trace: merged +N / not found / failed
++ Packaging — data/voice_attack_monster.xml (2,097,112 bytes) included via data/** copy to Release-Latest
+```
 
 ## 🎯 Highlights v1.11.1
 
@@ -351,6 +686,348 @@ No more white popups
 ---
 
 ## 📋 Detailed Changelog
+
+
+
+
+
+
+### <span style="color:#00D084">●</span> 1.11.9 — HUD Unificado Fijo: Single Bubble + Nombre/Barra Pantalla Sin Zoom
+
+> **Objetivo:** eliminar doble burbuja NPC (GIF pintado 2 veces `x+1,y+1` + `x,y`), nombre/barra del God que crece con `g.Transform=Scale(zoom)` y desalineación `mundo×zoom` vs `WorldToScreen` con offsets distintos.
+
+<details open>
+<summary><b>🔹 Single Bubble — NpcBubbleGifProvider</b></summary>
+
+- **Archivo:** `Viewport/NpcBubbleGifProvider.cs:154` `Draw`
+- **Antes:** `g.DrawImage(bmp, x+1,y+1,w,h); g.DrawImage(bmp, x,y,w,h);` → sombra desplazada interpretada como segunda burbuja.
+- **Ahora:** `try { g.DrawImage(bmp, new Rectangle(px,py,w,h)); }` **1 sola vez**, sin rectángulo de fondo; fallback solo letra `Tahoma 7` outline negro + fill `245,245,245`.
+
+</details>
+
+<details>
+<summary><b>🗺️ HUD Pantalla — MapRenderer sin zoom</b></summary>
+
+- **Archivo:** `Viewport/MapRenderer.cs:1451` `RenderPlayer` + `Viewport/MapRenderer.cs:1757` `DrawSimulatedCreatureInformation`
+- **Antes:** `RenderPlayer` dibujaba `27x4` health/mana + nombre `Tahoma 8` + `DrawOutlinedText` dentro de `g.Transform=Scale(zoom)` → texto agrandado/encogido con zoom, cortado.
+- **Ahora:** `RenderPlayer` solo `DrawCreatureAppearance` (sprite escala con mapa); `DrawSimulatedCreatureInformation` vaciado — `// Nombre/barra/bubble ÚNICAMENTE en MapViewport overlay (pantalla, tamaño fijo)`.
+
+</details>
+
+<details>
+<summary><b>📏 Tamaño Fijo — MapViewport único HUD</b></summary>
+
+- **Archivo:** `Viewport/MapViewport.cs:1566` `RenderSimulationSpeechBubbles` reemplazado completo.
+- **Antes:** 3 rutas inconsistentes `22x3 vs 27x4` `py-6 vs py-4` `textY` distinto GDI/D3D11, `Font 7*scale` vs `7*zoom`, `StringFormat` sin `NoClip` en algunos caminos.
+- **Ahora:** `pixelSize=camera.PixelSize` solo para centrar `centerX=sx+pixelSize/2`; todos los tamaños `BarWidthPx=27 BarHeightPx=4 NameBarGapPx=2 BubbleSizePx=12 BaseFontPt=7 * EffectiveScale(0.75-1.5)` **nunca `camera.Zoom` ni `PixelSize`**. `barX=centerX-barW/2 barY=sy-6*scale nameX=centerX-ts.Width/2 nameY=barY-ts.Height-gap` `bubbleX=nameX+ts.Width+3*scale bubbleY=nameY+(ts.Height-12*scale)/2` + `TibiaHudRenderer.DrawNpcBubble` sin caja; `speech` `Tahoma 7*scale` `tx=sx+(pixelSize-sz.Width)/2 ty=sy-30*scale+yAnim` outline negro sin rectángulo azul.
+
+</details>
+
+<details>
+<summary><b>✅ Validación 1.11.9</b></summary>
+
+| Comando | Resultado |
+| :--- | :--- |
+| `dotnet build -c Release --no-restore` | 0 errores · `LegacyXEditor.dll 1.11.9.0` |
+| `HUD` | 1 bubble NPC, nombre/barra tamaño fijo con zoom 12%…400%, sin doble, sin corte NoClip, centrado OTClient |
+| `God` | Nombre/mana mismo path fijo overlay, no crece con zoom |
+
+</details>
+
+
+### <span style="color:#00D084">●</span> 1.11.8 — Acerca de Goto Website Pagina Oficial LegacyX
+
+> **Objetivo:** fijar `Acerca de → Goto Website F3` a la web oficial `https://ricker72.github.io/legacyx/` en vez de canary.
+
+<details open>
+<summary><b>🌐 Goto Website — Pagina Oficial</b></summary>
+
+- **Archivo:** `MainForm.cs:6446` `aboutWebsiteMenuItem_Click`
+- **Antes:** `Process.Start("https://github.com/opentibiabr/canary")`
+- **Ahora:** `Process.Start(new ProcessStartInfo("https://ricker72.github.io/legacyx/"){UseShellExecute=true})`
+- **Menu:** `Acerca de` → `Goto Website F3` (ver screenshot flecha roja) abre navegador externo a `ricker72.github.io/legacyx`.
+
+</details>
+
+<details>
+<summary><b>✅ Validación 1.11.8</b></summary>
+
+| Comando | Resultado |
+| :--- | :--- |
+| `dotnet build -c Release --no-restore` | 0 errores · `LegacyXEditor.dll 1.11.9.0` |
+| `Acerca de → Goto Website` | Abre `https://ricker72.github.io/legacyx/` |
+
+</details>
+
+
+### <span style="color:#00D084">●</span> 1.11.7 — HUD NoClip + Barra Centrada + D3D11SimulationBridge ConcurrentQueue GPU
+
+> **Objetivo:** evitar texto cortado/estirado con zoom, barras desacomodadas y ataques atrapados en RAM (UpdateTick async sin DeviceContext). Delegar efectos a cola thread-safe procesada en hilo principal D3D11.
+
+<details open>
+<summary><b>📝 Texto — NoClip + centrado</b></summary>
+
+- **Archivos:** `Viewport/TibiaHudRenderer.cs:72` `RenderCreatureHUD_Fixed`
+- **Antes:** `FormatFlags.NoWrap` sin `NoClip` → con zoom `MeasureString` truncaba píxeles, `screenX+16*zoom` desalineado.
+- **Ahora:** `StringFormat NoWrap|NoClip` + `textCenterX = screenX+16*zoom` + `healthBarX = screenX+(32*zoom-barWidth)/2` centrado, `healthBarY=screenY-6*zoom`, `textY=healthBarY-12*zoom`, `Font 8*zoom Bold`, `DrawString Black sombra + LightSkyBlue/LimeGreen`.
+
+</details>
+
+<details>
+<summary><b>🚀 Bridge — ConcurrentQueue GPU</b></summary>
+
+- **Archivos:** `Viewport/D3D11SimulationBridge.cs:22` + `Viewport/IngameSimulation.cs:1459` + `Viewport/D3D11Renderer.cs:2628`
+- **Antes:** `UpdateTick` async encolaba `missiles/effects` directo en RAM sin `DeviceContext`, marca de target sin explosión.
+- **Ahora:** `ConcurrentQueue<ActiveSimulationEffect> _gfxEffectsQueue` + `List<ActiveSimulationEffect> _runningEffects`; `EnqueueMonsterAttack(effectId,fromX,fromY,toX,toY,isDistance)` desde `TryMonsterAttackGod`; `ProcessAndRenderEffects(context,16f,this,null)` en `D3D11Renderer.Render` main thread → `Progress+=delta/250` / `ElapsedTime 90ms/frame` → `ResolveEffectSprite` → `DrawEffectSprite` vía `textureCache.GetOrCreate` + `AddQuad`. `Clear()` en `Stop`.
+
+</details>
+
+<details>
+<summary><b>✅ Validación 1.11.7</b></summary>
+
+| Comando | Resultado |
+| :--- | :--- |
+| `dotnet build -c Release --no-restore` | 0 errores · `LegacyXEditor.dll 1.11.9.0` |
+| `HUD` | Nombre no cortado, barra centrada 27*zoom, sin estiramiento |
+| `Bridge` | Misiles 250ms + explosiones 90ms/frame visibles en D3D11, sin atrapados |
+
+</details>
+
+
+### <span style="color:#00D084">●</span> 1.11.6 — Screenshot 2 HUD: Nombres Adaptativos 22x3 + Bubble 10x10 sin Cuadro Azul SINGLE
+
+> **Objetivo:** corregir nombres demasiado grandes/distorsionados, barras desacomodadas y bubble NPC con cuadro azul (duplicación GDI/D3D11) para paridad con screenshot 2 (Alice/Ricker/Cat/Fynn): nombre pequeño 7pt adaptativo, barra fina 22x3 gap 2px, bubble blanca ... 10x10 a la derecha del nombre sin fondo azul, SINGLE overlay.
+
+<details open>
+<summary><b>🔤 Nombres — Tamaño Adaptativo sin Distorsión</b></summary>
+
+- **Archivos:** `Viewport/TibiaHudRenderer.cs:9` + `Viewport/MapRenderer.cs:1777` `DrawSimulatedCreatureInformation`
+- **Antes:** `Tahoma 7.5*scale` / `8f` sin clamp → con `CreatureInfoScale>1` el texto se estiraba y tapaba la barra; `nameY=py-12-Height` dejaba gap 10px irregular.
+- **Ahora:** `7.0f * Math.Clamp(scale,0.8f,1.15f)` `GraphicsUnit.Point` + `TextRenderingHint.ClearTypeGridFit`, `textY=py-14*scale - Height`, `healthBarY=textY+Height+2*scale` (barra pegada 2px bajo nombre, centrada). `barW=22*scale` `barH=3*scale` (antes 27x4) fino como screenshot (Alice verde 22px). `barX = px+(32*scale-barW)/2`.
+
+</details>
+
+<details>
+<summary><b>❤️ Barras — 22x3 Gap 2px</b></summary>
+
+- **Antes:** `27x4` en `px+3,py-4` fija, con nombres grandes dejaba hueco desacomodado.
+- **Ahora:** `22x3` en `healthBarY=textY+Height+2`, `barX` centrado, `innerW=barW-2` para fill, `py-4` solo fallback para criaturas grandes (`pixelH>32`). Barras de Alice/Cat/Fynn ahora finas y pegadas al nombre como screenshot.
+
+</details>
+
+<details>
+<summary><b>💬 Bubble — 10x10 Blanca sin Cuadro Azul, SINGLE</b></summary>
+
+- **Antes:** `MapRenderer.cs:1744` bubble `12x12` en `px+10,py+1` + cuadro azul `FillRectangle 40,80,255` 14x14; `MapViewport.cs:1595` duplicaba bubble en overlay D3D11 + GDI → dos instancias + cuadro azul no existe en screenshot 2 (Fynn ... blanco limpio).
+- **Ahora:** `TibiaHudRenderer` sin `FillRectangle` azul; `bubbleSize=10*scale` (antes 12), `bubbleX=textX+textWidth+4*scale` `bubbleY=textY-2*scale` (a la derecha del nombre, no bajo barra). `MapRenderer` delega bubble únicamente al overlay `MapViewport.RenderSimulationSpeechBubbles` (HashSet `bubbleDrawn` + lerp `px+10,py+1` eliminado, ahora `textX` based), speech `StaticText` solo D3D11 (GDI ya dibuja), bubble SINGLE para ambos renderers. `DrawNpcBubble` solo `HasGif? Draw : rect` blanco, sin fondo azul.
+
+</details>
+
+<details>
+<summary><b>✅ Validación 1.11.6</b></summary>
+
+| Comando | Resultado |
+| :--- | :--- |
+| `dotnet build -c Release --no-restore` | 0 errores · `LegacyXEditor.dll 1.11.9.0` |
+| `--validate-client` | PASS 533 brushes 11190 |
+| `--validate-render` | PASS 23626 DAT 99685 refs |
+| `HUD screenshot 2` | Nombres 7pt no distorsionados, barras 22x3 gap2, bubble 10x10 blanca ... sin azul, SINGLE |
+
+</details>
+
+
+### <span style="color:#00D084">●</span> 1.11.5 — DAT Magic Effects/Missiles + God Mode Hunting + Corpse Volátil + Loot OtbNameNormalizer + NPC HUD Fixed 12x12
+
+> **Objetivo:** extender el lector 10.98 para Magic Effects (175) y Distance Missiles (54) sin reescribir el parser binario, unificar cacería God Mode (HP 50-150, sangre 1, Poff 3, cadáver volátil hash X,Y,Z, loot multicolor #00A800/#0055FF, texto flotante Impact 9), cachear razas de monstruos con puente OTB, normalizar nombres O(1) plural, y fijar el HUD del NPC a 12x12 centrado bajo la barra 27x4 evitando duplicación GDI/D3D11.
+
+<details open>
+<summary><b>🧱 DAT 10.98 — SimulationEffectData + LegacyXClientAssets</b></summary>
+
+- **Archivo:** `SharpTibiaProxy/Domain/SimulationEffectData.cs:12` `SimulationEffectData{Id,Width,Height,AnimationPhases,SpriteIds}` + `LegacyXClientAssets{MagicEffects,DistanceMissiles} Dictionary<uint,SimulationEffectData>`
+- **Archivo:** `SharpTibiaProxy/Domain/Items.cs:352` extensión tras `while(id<=maxclientID)` — mismo `BinaryReader` que Items/Outfits (header 12 + skip categories vía `SkipCategory` idéntico a la propuesta del usuario). `ReadEffectBlock` consume flags `0xFF`, bloque sprite `w/h/layers/xdiv/ydiv/zdiv/anim` + fallback `FindNextEffectFF` (`FF 01 01`) para payloads con `zdiv 00` → `total = payloadBytes/4` (19/37/25 sprites reales 10.98). `Trace [DAT] MagicEffects=175 DistanceMissiles=54`.
+- **Archivo:** `SharpTibiaProxy/Domain/LegacyXDatExtension.cs:15` inyector ligero `InjectSimulationAssets(datPath, maxItems,maxOutfits,maxEffects,maxMissiles)` posiciona `Position=12` + `SkipCategory` + `ParseEffectBlock` (StringBuilder a-z0-9, polvo) sin tocar OTBM.
+- **Validación:** `validate-client` 533 brushes 11190, `validate-render` 23626 DAT 99685 refs 48754 SPR decode, `LegacyXClientAssets` poblado en `Items.Load`.
+
+</details>
+
+<details>
+<summary><b>⚔️ Hunting — God Mode cacería completa</b></summary>
+
+- **Archivos:** `Viewport/HuntingModels.cs:7` `LootItemTemplate`/`FloatingSimulationText` + `Viewport/HuntingSimulationEngine.cs:15` + `Viewport/IngameSimulation.cs:1531` `HandleMonsterDeath` + `Viewport/TemporaryCorpseOverlay.cs:12` + `Viewport/SimulationWorldLayer.cs:7`
+- **Antes:** `TryCombatTick` solo `animatedTexts.Add(POFF)` sin cadáver ni loot; sin capa volátil; sin consola multicolor.
+- **Ahora:** `IngameSimulation.ExecuteAdminAttack(creatureId)` daño `50-151` + `effects.Add(1)` sangre + `FloatingSimulationText` rojo Impact 9 + `HandleMonsterDeath` corpse `SimulationTileMap(hash X,Y,Z)` + `SimulationWorldLayer` (hash 3D) + `effects.Add(3)` Poff + loot `1..100000` `*IsRare` → `LegacyXConsole.AddSimulationMessage` verde `#00A800` / azul `#0055FF` + `huntingFloatingTexts` 3000ms `SpeedY -15`. `MapTabPage.cs:193` precarga `MonsterRaceManager` → `SpawnEngineCache` al `StartIngameSimulation`. `MapViewport.cs:1938` `GodPick` HUD → `TryGodHuntingAttack.Invoke`. `MapRenderer.cs:1910` `DrawTemporaryCorpses` + `DrawHuntingFloatingTexts` (Impact 9 + sombra) y `D3D11Renderer.cs:2630` `DrawTemporaryCorpsesD3D11` (solo volátil, nunca `OtMap.Save`). `ViewPort.TemporaryCorpseOverlayClear` en `StopIngameSimulation`.
+
+</details>
+
+<details>
+<summary><b>🧬 MonsterRaceManager — caché centralizado</b></summary>
+
+- **Archivos:** `Viewport/MonsterRaceProfile.cs:5` + `Viewport/MonsterRaceManager.cs:7` + `Viewport/SimulationSpawnEngine.cs:7`
+- **Antes:** `MonsterRaceManager` inexistente; `ResolveItemIdByName` scan O(n) cada muerte → stuttering D3D11.
+- **Ahora:** `MonsterRaceManager(_monsterDataFolder, otItems)` cache `_loadedRaces` `Dictionary<string,MonsterRaceProfile>` O(1), `FindMonsterXmlPath` recursivo `Directory.GetFiles(*.xml,AllDirectories)` + `monsters.xml` índice `<monster file/name>`, `LoadRaceFromFiles` extrae `look@corpse` → `LegacyXOtbInterceptor.ResolveServerId` + `loot/item@name/id/chance/countmax` → `MonsterLootEntry` + `LegacyXItemDatabase.FindIdByName` (normalizado). `SimulationSpawnEngine.HandleMonsterSpawnInSimulation(ICreature/IngameCreatureState)` clona `LootTable` → `RuntimeLootTable` + `SpawnEngineCache.Store(creatureId,raceData)` para `HandleMonsterDeath` fallback si `Config.Loot` vacío (placeholder `creatures.xml`). `MapTabPage` precarga al iniciar simulación.
+
+</details>
+
+<details>
+<summary><b>🔍 OtbNameNormalizer — O(1) normalizado</b></summary>
+
+- **Archivos:** `Viewport/OtbNameNormalizer.cs:5` + `Viewport/LegacyXItemDatabase.cs:5` + `MainForm.cs:3318`
+- **Antes:** `FindIdByName` iteraba `OtItems.ServerItems` cada loot → O(n) + fallaba con `"Clomp's Head"`/`"gold-coin"`/`"platinum coins"`.
+- **Ahora:** `OtbNameNormalizer.Normalize` `ToLowerInvariant+Trim` + `StringBuilder` a-z0-9, ` -_,`→espacio único, `'` ignorado, remueve dobles. `LegacyXItemDatabase.BuildFromOtItems` `RegisterItem(serverId,originalName)` → `_normalizedNameIndex[Normalize(name)]=id` + `_idToNameMap`. `FindIdByName` O(1) `TryGetValue` + failsafe plural `s`→singular. `MainForm.LoadItemCatalog` construye ambos mapas tras `LoadOtb/LoadXml`. `MonsterRaceManager.ResolveItemIdByName` ahora `LegacyXItemDatabase.FindIdByName`.
+
+</details>
+
+<details>
+<summary><b>🎯 NPC HUD Fixed — SINGLE 12x12 bajo barra 27x4</b></summary>
+
+- **Archivos:** `Viewport/TibiaHudRenderer.cs:7` `RenderNpcHUD_Fixed` + `Viewport/MapRenderer.cs:1744` + `Viewport/MapViewport.cs:1595`
+- **Antes:** `MapRenderer.cs:1744` bubble en `bgX+(barW-12)/2, bgY+barH+2` (`py+2`) + `nameY=py-12-Height`; `MapViewport.cs:1619` duplicaba bubble en overlay D3D11 + GDI → doble instancia.
+- **Ahora:** `TibiaHudRenderer.RenderNpcHUD_Fixed(g,sqmX,sqmY,currentHp,maxHp,name,bubble)` base `sqmSize 32` → `textY=baseY-14` Tahoma 7.5 Bold Black+ #00C0C0, `healthBarY=baseY-4` `27x4` bg #400000 + fill `GetHealthColor`, `bubble` `12x12` en `baseX+10,baseY+1` + cuadro azul 14x14 #4080FF. `MapRenderer` delega bubble únicamente al overlay GDI+ superior (`MapViewport.RenderSimulationSpeechBubbles` centralizado con `HashSet` `bubbleDrawn` + lerp `px+10*scale,py+1*scale`), eliminado `DrawNpcBubble` disperso. `MapViewport` speech solo `D3D11` (GDI ya dibuja `StaticText`), bubble SINGLE para ambos renderers.
+
+</details>
+
+<details>
+<summary><b>✅ Validación 1.11.5</b></summary>
+
+| Comando | Resultado |
+| :--- | :--- |
+| `dotnet build -c Release --no-restore` | 0 errores · `LegacyXEditor.dll 1.11.9.0` |
+| `--validate-client <Tibia>` | PASS 533 brushes 11190 |
+| `--validate-render <Tibia>` | PASS 23626 DAT 99685 refs 48754 SPR decode |
+| `--validate-brush-engine <Tibia>` | PASS wall/door corpus |
+| `Hunting` | click HUD → daño 50-150 + sangre 1 + POFF 3 + corpse hash + loot verde/azul + texto flotante Impact 9 |
+| `Normalizer` | `Clomp's Head`→`clomp head` →25985, `platinum coins`→`platinum coin` |
+| `HUD` | bubble 12x12 `px+10,py+1` SINGLE, barra 27x4 `px+3,py-4`, nombre `py-14` |
+
+</details>
+
+
+### <span style="color:#00D084">●</span> 1.11.4 — NPC Bubble Single Right-Under-HP + Monster Voice Viewport Boost (anti-saturation)
+
+> **Objetivo:** eliminar el doble bubble de NPC y llevar la burbuja al lado derecho bajo la barra 31x4, pegada al cuerpo y siguiendo el lerp del NPC (GDI+ y D3D11 mismo anclaje). Acelerar voces de monstruos dentro del viewport+GOD: si ataca al god la voz es ½ interval (+15 chance), si está en AwareRange 0.7× interval (+10 chance), y los monstruos dentro del tickSet (8,6+2 margin) pero fuera del AwareRange también hablan; todo con throttle máx. 3 voces/tick para no saturar el render/speech.
+
+<details open>
+<summary><b>💬 NpcBubble — Single Bubble Derecha Bajo HP</b></summary>
+
+- **Antes:** `MapRenderer.cs:1753` calculaba `bubblePx = nameTx + sz.Width + 5` / `bubblePy = nameTy + 2` (a la derecha del **nombre**, por encima de la barra, superpuesta con `SpeechText` centrado `py-28`). `MapViewport.cs:1582` para D3D11 dibujaba en `px,py` (origen del tile, pies del NPC) → en GDI+ 1 bubble arriba, en D3D11 1 bubble abajo → percepción de 2 bubbles o solapamiento con el speech.
+- **Ahora (`MapRenderer.cs:1740` + `MapViewport.cs:1574`):**
+  ```csharp
+  // GDI+ (MapRenderer) y D3D11 (MapViewport overlay) mismo anclaje
+  float scale = CreatureInfoScale; // 1f default
+  int w31 = Round(31*scale), h4 = Round(4*scale);
+  int bgX = px + (TilePixels - w31)/2;
+  int bgY = py - Round(10*scale);
+  int bubblePx = bgX + w31 + 4; // 4px gap a la derecha de la barra 31x4
+  int bubblePy = bgY + h4 + 2;  // 2px debajo de la barra, pegada al cuerpo, sigue lerp px/py
+  DrawNpcBubble(g, bubble, bubblePx, bubblePy, 12,12);
+  ```
+  Para `MapViewport` `pixelSize = camera.PixelSize` (32*zoom) se usa igual: `bgX = px+(pixelSize-w31)/2`. Giro/lerp `px/py` ya interpolados → la burbuja sigue al NPC en movimiento. Speech text queda centrado `py-28` → no overlap. **Single bubble** verificada: GDI+ early-return en `MapViewport` evita duplicado entre renderers.
+
+</details>
+
+<details>
+<summary><b>🗣️ Monster Voice — Viewport Boost + Chance Corto + Anti-Saturación</b></summary>
+
+- **Antes:** `IngameSimulation.cs:1204` `UpdateVoices(entry, delta, godActive)` con `voices.IntervalMs 5000` / `Chance 10` estático → esperado 50s por voz; `Advance` tickSet ya era `EnumerateActiveNearGod` (8,6+2 margin) pero `if(!IsInSpectatorRange) continue` estaba **antes** de `UpdateVoices` → monstruos dentro del viewport margin (8,6+2) pero fuera del `AwareRange(8,6)` quedaban mudos; atacando al god aún usaba 5000/10.
+- **Ahora:**
+  - `IngameSimulation.cs:47` `_voicesEmittedInCurrentTick` + `MaxVoicesPerTick=3` reseteado al inicio de `Advance(simulationClockMs)`.
+  - `UpdateVoices(entry, delta, godActive, godPos)` calcula `effectiveInterval/effectiveChance`:
+    - `IsChasing || dist<=5 → effectiveInterval = max(800, Interval/2), effectiveChance = min(100, Chance*2+15)` (monstruo te ataca → habla casi instantáneo).
+    - `IsInSpectatorRange → effectiveInterval = max(1000, Interval*0.7), effectiveChance = min(100, Chance+10)` (dentro de viewport+god → 30% más rápido).
+    - `UpdateVoices` se mueve **antes** del gate `IsInSpectatorRange` → viewport margin 8,6+2 ahora habla; aggro/movimiento siguen gated.
+  - Typing 400ms usa `effectiveInterval-400`. `if(_voicesEmittedInCurrentTick >=3) return` antes del roll → nunca más de 3 voces/tick, evita saturación del render/speech/AnimatedText.
+  - Overload `UpdateVoices(entry,delta,godActive)` → `UpdateVoices(...,null)` para compat.
+
+</details>
+
+<details>
+<summary><b>✅ Validación 1.11.4</b></summary>
+
+| Comando | Resultado |
+| :--- | :--- |
+| `dotnet build -c Release --no-restore` | 0 errores · `LegacyXEditor.dll 1.11.9.0` |
+| `MapRenderer bubble` | GDI+ `Alice` bubble single `bgX+31+4` / `bgY+4+2` sigue lerp, no overlap `SpeechText` |
+| `MapViewport bubble` | D3D11 mismo anclaje `pixelSize` → `bgX+w31+4` |
+| `Monster voice` | `IsChasing` interval 2500 chance 35 → voz en <3s atacando; viewport 3500 chance 20 → <10s; throttle 3/tick sin spam |
+
+</details>
+
+### <span style="color:#00D084">●</span> 1.11.3 — Creature Voices Fix (HasDetailedSimulation Placeholder Enrichment + Legacy Directory Fallback)
+
+> **Objetivo:** desbloquear voces/ataques cuando `Preference → Monster/Npc xml directory` apunta a la carpeta real pero `creatures.xml` ya había stampado un placeholder sin datos. Antes `skipExisting` cortaba antes de parsear el XML real; ahora `HasDetailedSimulation` distingue placeholder de dato real, permitiendo enriquecer el placeholder con el archivo real y con `voice_attack_monster.xml` incluso desde `LoadServerDataDirectory`. Eliminadas todas las rutas hardcodeadas `C:\Users\samatha\...` y centralizado el fallback portable.
+
+<details open>
+<summary><b>🧬 HasDetailedSimulation + LoadCreatureFile/Lua Enrichment</b></summary>
+
+- **Archivo:** `SharpMapTracker/Creatures/CreatureAppearanceCatalog.cs:21` `CreatureAppearance.HasDetailedSimulation`, `:340` `LoadCreatureLuaFile`, `:765` `LoadCreatureFile`
+- **Antes:** `LoadCreatureFile` hacía `if (skipExisting && entries.ContainsKey(name)) return false;` tras un `peek` del nombre sin parsear; `LoadCreatureLuaFile` igual. Como `LoadFromPreferences` cargaba primero `data/1098/creatures.xml` (Rule 1, solo `name+looktype` → `MonsterDefault` con `Voices=null`), todo monstruo ya listado quedaba bloqueado; su `<voices>/<attacks>` real en la carpeta de preferencias nunca se leía. Solo `voice_attack_monster.xml` (~839) topaba, pero vía merge aislado.
+- **Ahora:** `HasDetailedSimulation` (`false` para `creatures.xml`/`npcs.xml` master, `true` para XML/lua real o fallback `voice_attack`). `LoadCreatureFile`/`LoadCreatureLuaFile` solo saltan si `hasExisting && existing.HasDetailedSimulation`; si es placeholder, lo enriquecen/sobrescriben con el archivo real (reusando `existing.Outfit` si el archivo no trae `<look>` propio). Si el archivo trae `<look>` se usa; si no, se conserva el look del placeholder para no perder el outfit. `SourceFile` se anota `"+detail:"+path`. `lua` con `No outfit block` ya no se descarta si hay placeholder.
+- **Validación:** `dotnet build -c Release --no-restore` 0 Errores · preferencia con `creatures.xml` 1766 + carpeta real → voces cargadas (no mudo) · `LoadServerDataDirectory` legacy también enriquecido.
+
+</details>
+
+<details>
+<summary><b>📁 ApplyVoiceAttackFallback — Portable + Legacy Dir</b></summary>
+
+- **Archivo:** `CreatureAppearanceCatalog.cs:1425` `ResolveVoiceAttackPath` (5 candidatos portables), `ResolveVoiceAttackFallbackPath` alias, `ApplyVoiceAttackFallback()`
+- **Antes:** `ResolveVoiceAttackPath` se resolvía inline solo en `LoadFromPreferences()` con `try/catch` duplicado; `LoadServerDataDirectory()` (flujo legacy de un solo directorio) nunca lo leía → voces faltantes en esa configuración. Además existían rutas absolutas `C:\Users\samatha\...` (Kruger, G[10.91], `voice_attack_monster.xml` absoluto, `npcs.xml` absoluto) que en otra máquina son `Directory.Exists==false` y se silencian.
+- **Ahora:** `ResolveVoiceAttackPath()` ya tenía 5 candidatos portables (`BaseDirectory/data`, `data/data`, `CurrentDirectory/...`, `AppDomain...`); se extrae `ApplyVoiceAttackFallback()` que hace `Resolve→TryLoadVoiceAttackFallback` con `Trace` y se invoca desde **ambos** `LoadFromPreferences` y `LoadServerDataDirectory`. `TryLoadNpcsXmlPrimary` y todo rastro `C:\Users\samatha\` eliminado de `CreatureAppearanceCatalog`.
+- **Validación:** `ResolveVoiceAttackPath` resuelve en `Release-Latest/data/voice_attack_monster.xml` portable; `LoadServerDataDirectory` con `MonsterNpcDataDirectory` ahora también tracea `merged +N`.
+
+</details>
+
+<details>
+<summary><b>🔧 TryLoadVoiceAttackFallback — Placeholder Attack No Cuenta</b></summary>
+
+- **Archivo:** `CreatureAppearanceCatalog.cs:1519` `TryLoadVoiceAttackFallback`
+- **Antes:** `existingHasVoices = Voices.Count>0` y `existingHasAttacks = Attacks.Count>0` contaban el ataque sintético por defecto (`MonsterDefault` → 1 melee) como "ya tiene ataques", por lo que `voice_attack_monster.xml` no lo reemplazaba si el placeholder ya tenía ese dummy.
+- **Ahora:** `existingIsPlaceholder = !existing.HasDetailedSimulation`; `existingHasVoices = !isPlaceholder && Voices.Count>0`; idem para attacks. Un placeholder se trata como vacío → `voice_attack_monster.xml` lo rellena completo. Si ya vino del directorio real (detallado), ese mantiene prioridad y el fallback solo topa cuando es estrictamente más rico (`Voices.Count > existing`, `Attacks.Count > existing`). `HasDetailedSimulation=true` se marca tanto en merge como en creación nueva.
+- **Prioridad final:** `1) Carpeta real Preference 2) voice_attack_monster.xml 3) creatures.xml/npcs.xml`.
+
+</details>
+
+<details>
+<summary><b>✅ Validación 1.11.3</b></summary>
+
+| Comando | Resultado |
+| :--- | :--- |
+| `dotnet build -c Release --no-restore` | 0 errores · `LegacyXEditor.dll 1.11.3.0` |
+| `fase_monster_voices_fix.py --root` | 11/15 OK + 4 manual (hardcode ya limpio en 1.11.2, placeholder log patched) |
+| `LoadFromPreferences` con `creatures.xml` + dir real | Voces/attacks reales del dir enriquecen placeholder (no skip) |
+| `LoadServerDataDirectory` legacy | También aplica `voice_attack_monster.xml` portable |
+
+</details>
+
+### <span style="color:#00D084">●</span> 1.11.2 — Creature Catalog Voices/Attacks Supplement (voice_attack_monster.xml Portable Merge)
+
+> **Objetivo:** completar `voices` y `attacks` de simulación faltantes sin romper la autoridad de `Creatures.xml` / `npcs.xml` / directorio de preferencias. El suplemento `data/voice_attack_monster.xml` solo rellena cuando el fallback es más rico; nunca pisa un dato ya cargado con igual o mayor riqueza. Resolver portable sin rutas absolutas de máquina.
+
+<details open>
+<summary><b>🗣️ CreatureCatalog — Voices/Attacks Portable Supplement</b></summary>
+
+- **Archivo:** `SharpMapTracker/Creatures/CreatureAppearanceCatalog.cs:78` `LoadFromPreferences`, `:146` `LoadServerDataDirectory`, `ResolveVoiceAttackPath`, `TryLoadVoiceAttackFallback`
+- **Comportamiento antes:** tras `TryLoadCreaturesXmlPrimary` + `LoadMonsterDirectory(skipExisting:true)` / `LoadNpcDirectory`, los monstruos quedaban con `voices=null` y `attacks=CreateDefaultAttacks` (single melee) si la fuente preferente no traía `<voices>/<attacks>`. No había suplemento. `ResolveVoiceAttackPath` anterior solo probaba 3 candidatos (`AppContext.BaseDirectory/data`, `CurrentDirectory/data`, `AppDomain.../data`) sin `data/data/` y el fallback antiguo se ataba a `data/**` sin cubrir despliegues donde `data/data/voice_attack_monster.xml` es el layout.
+- **Ahora:**
+  - `LoadFromPreferences` — `Clear()` → `TryLoadCreaturesXmlPrimary()` + `TryLoadNpcsXmlPrimary()` + `LoadMonsterDirectory(skipExisting:true)` + `LoadNpcDirectory(skipExisting:true)` (Creatures.xml primario) → `ResolveVoiceAttackPath()` → `TryLoadVoiceAttackFallback()` → `monsters+=added` + `Trace merged +N / not found / failed` → `LoadNpcBubbles` + `ClassifyUnlistedNpcBubbles`. Si no hay dirs de preferencia, delega a `LoadServerDataDirectory`.
+  - `LoadServerDataDirectory` — `Clear()` → `TryLoadCreaturesXmlPrimary()` (+ `dataDirectory/creatures.xml` si 0) + `TryLoadNpcsXmlPrimary()` (+ `dataDirectory/npcs.xml` o `data/npcs.xml`) + `LoadMonsterDirectory`/`LoadNpcDirectory` + `LoadNpcBubbles` → mismo `ResolveVoiceAttackPath`/`TryLoadVoiceAttackFallback` con `Trace merged (server data): +N`.
+  - `ResolveVoiceAttackPath()` — 5 candidatos portables (sin absolutos de máquina): `AppContext.BaseDirectory/data/voice_attack_monster.xml`, `AppContext.BaseDirectory/data/data/...`, `Directory.GetCurrentDirectory()/data/...`, `Directory.GetCurrentDirectory()/data/data/...`, `AppDomain.CurrentDomain.BaseDirectory/data/...`. Primero existente gana; `null` si ninguno.
+  - `TryLoadVoiceAttackFallback(path)` — lee texto, `Regex` strip `<?xml?>` y `<!-- -->`, envuelve en `<monsters>` si no hay raíz, `XDocument.Parse` con `try/catch` logueado. Itera `<monster name>`; lookup case-insensitive (`entries.TryGetValue` + scan `StringComparison.OrdinalIgnoreCase`). `ParseSimulationConfig(el, name, false, path)` con fallback `MonsterDefault(name)`. Merge: `existingVoiceCount` vs `fallbackVoiceCount` → `needVoices = existing==0 || fallback>existing`; `existingAttackCount` vs `fallbackAttackCount` → `needAttacks = existing==0 || fallback>existing || (existing<=1 && fallback>1)` (single-melee incompleto). `mergedVoices/mergedAttacks` = fallback si need y `>0` else existente. Si ninguno `continue`. Nuevo `IngameCreatureConfig` copia `Speed/WalkInterval/WalkRadius/.../NameDescription/Race/ManaCost/TargetChange/Flags/Defense/Elements` de `sc` pero con `mergedVoices/mergedAttacks`; reinsertado `entries[name] = CreatureAppearance { Name=existing.Name, IsNpc, Outfit, SourceFile+ "+fallback:"+filename, SimulationConfig=newCfg, Experience=existing!=0?existing:ReadInt(el,"experience",0), HealthMax=existing!=0?existing:0, GoldEstimate }`. Si no existe: requiere `<look type|item|lookex|typeex>` no cero; construye `Outfit` + `ParseSimulationConfig` + `experience/health max/gold` → nueva entrada.
+  - **Packaging:** `data/voice_attack_monster.xml` (2,097,112 bytes, índice real Tibia/CrystalServer) empaquetado vía `SharpMapTracker.csproj:46 data/** → PreserveNewest` y presente en `Release-Latest/data/` y `data/data/` según deploy; sin rutas hardcodeadas.
+- **Validación:** `dotnet build -c Release --no-restore` 0 Errores · `LegacyXEditor.dll 1.11.2.0` · `ResolveVoiceAttackPath` resuelve en `Release-Latest/data/voice_attack_monster.xml` portable (verificado por `Trace`); carga de catálogo sin excepción y sin pisar IDs/authoritative.
+
+</details>
+
+<details>
+<summary><b>✅ Validación 1.11.2</b></summary>
+
+| Comando | Resultado |
+| :--- | :--- |
+| `dotnet build -c Release --no-restore` | 0 errores · `LegacyXEditor.dll 1.11.2.0` |
+| `LegacyXEditor.exe --validate-client` / brush/render | PASS (no regresión — voices/attacks solo afecta `SimulationConfig`) |
+| `LoadFromPreferences` con `MonsterLuaDirectory` vacío | Trace `voice_attack_monster.xml not found` → sin crash; catálogo solo con `Creatures.xml` |
+| `LoadServerDataDirectory` con `Dhaoz.otbm` | `Trace [CreatureCatalog] voice_attack_monster.xml merged (server data): +N` — solo cuando portátil existe |
+
+</details>
 
 ### <span style="color:#00D084">●</span> 1.11.1 — AreaGen New-Map Center + GroundBrush CanDraw Parity + Planner E2E Anchors + Connector Certification
 
@@ -797,6 +1474,9 @@ int baseX = tileX*32 - tileOffset;
 | **v1.10.0** | **Live Host Scale+Firebase** | See detailed above |
 | **v1.11.0** | **Memory+Pool+Lazy+GIF+Creatures** | **This release — 100% RAM + Sector 4 + Lazy 32 + GIF 18x18 + 1766 + 130 + Town 1 + Full Sim + Header 1.11.0** |
 | **v1.11.1** | **AreaGen Center + GroundBrush CanDraw + Planner E2E** | **New map centered 128,128,7 · ground always drawable (RME) · planner E2E on empty map · connector corpus 4th arg** |
+| **v1.11.2** | **Creature Catalog Voices/Attacks Supplement** | **voice_attack_monster.xml portable merge · 5 candidatos data/data · case-insensitive · preference authoritative** |
+| **v1.11.3** | **Creature Voices Fix (HasDetailedSimulation)** | **placeholder enrichment + legacy dir fallback + no hardcoded paths** |
+| **v1.11.4** | **NPC Bubble Single + Voice Boost** | **bgX+w31+4 / bgY+h4+2 seguir lerp + viewport ½ interval + throttle 3/tick** |
 
 <div align="center">
 
@@ -895,7 +1575,7 @@ Friend-all, wildcard, zilch, super, clear_borders/friends XML-order, optional-on
 
 <div style="background: #1a1a2e; padding: 12px; border-radius: 6px; border-left: 4px solid #00D084; color: #eaeaea;">
 
-**Build gate:** `dotnet build SharpMapTracker/SharpMapTracker.csproj -c Release --no-restore` — **0 Errores** (14 advertencias preexistentes no introducidas por 1.11.1) — `LegacyXEditor.dll 2,780,160 bytes` `1.11.1.0`
+**Build gate:** `dotnet build SharpMapTracker/SharpMapTracker.csproj -c Release --no-restore` — **0 Errores** (14 advertencias preexistentes no introducidas por 1.11.4) — `LegacyXEditor.dll 1.11.9.0`
 
 </div>
 
@@ -956,7 +1636,7 @@ dotnet build SharpMapTracker/SharpMapTracker.csproj `
 ```
 Release-Latest/
 ├── LegacyXEditor.exe              # 170,496 bytes — entry point
-├── LegacyXEditor.dll              # 2,780,160 bytes — 1.11.1.0
+├── LegacyXEditor.dll              # 2,780,160 bytes — 1.11.4.0
 ├── OpenTibiaCommons.dll            # OtMap / OtTile / OtItems
 ├── SharpTibiaProxy.dll             # DAT/SPR proxy
 ├── Vortice.*.dll                  # D3D11 / DXGI / D3DCompiler
@@ -1042,7 +1722,7 @@ Use your own Tibia 10.98 installation via Preferences → Client Folder.
 
 ### 🚀 Ready to Map?
 
-**`LegacyX Editor v1.11.1` — Beyond RME. Pure C#. One Runtime.**
+**`LegacyX Editor v1.11.4` — Beyond RME. Pure C#. One Runtime.**
 
 ```powershell
 .\Release-Latest\LegacyXEditor.exe
