@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v10.0": {
-      "LegacyXEditor/1.13.1": {
+      "LegacyXEditor/1.15.3": {
         "dependencies": {
           "Microsoft.Data.Sqlite": "10.0.10",
           "MoonSharp": "2.0.0",
@@ -426,7 +426,7 @@
     }
   },
   "libraries": {
-    "LegacyXEditor/1.13.1": {
+    "LegacyXEditor/1.15.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -4,10 +4,10 @@
 
 # 🗺️ LegacyX Editor — Release Notes
 
-### **v1.13.1 - New Map Void Parity (No Sea Seed)**
+### **v1.15.4 - Window Title Dynamic Version (Title + About + Diagnostics)**
 ### `Tibia 10.98` � `.NET 10` � `Windows Forms` � `C#` � `D3D11 / GDI+`
 
-[![Version](https://img.shields.io/badge/version-1.13.1-00D084?style=for-the-badge&logo=dotnet)](#)
+[![Version](https://img.shields.io/badge/version-1.15.4-00D084?style=for-the-badge&logo=dotnet)](#)
 [![Tibia](https://img.shields.io/badge/Tibia-10.98-1071CC?style=for-the-badge)](#)
 [![Runtime](https://img.shields.io/badge/runtime-.NET%2010%20Windows-512BD4?style=for-the-badge&logo=windows)](#)
 [![Language](https://img.shields.io/badge/language-C%23-239120?style=for-the-badge&logo=csharp)](#)
@@ -18,7 +18,7 @@
 > No second runtime · No C++ in production · No invented IDs · No vibe coding.
 > RME `hampusborgos/rme@da7152e` `source/` is the only external authority.
 
-**?? Release Date:** `2026-09-11` &nbsp;|&nbsp; **?? Distribution:** `Release-Latest/` (single build) &nbsp;|&nbsp; **?? Commit:** `1.13.1-newmap-void-parity`
+**?? Release Date:** `2026-09-18` &nbsp;|&nbsp; **?? Distribution:** `Release-Latest/` (single build) &nbsp;|&nbsp; **?? Commit:** `1.15.4-window-title-dynamic-version`
 
 </div>
 
@@ -27,6 +27,12 @@
 ## 📑 Table of Contents
 
 - [? Executive Summary](#-executive-summary)
+- [🎯 Highlights v1.15.4](#-highlights-v1154)
+- [🎯 Highlights v1.15.3](#-highlights-v1153)
+- [🎯 Highlights v1.15.2](#-highlights-v1152)
+- [🎯 Highlights v1.15.1](#-highlights-v1151)
+- [🎯 Highlights v1.15.0](#-highlights-v1150)
+- [🎯 Highlights v1.14.0](#-highlights-v1140)
 - [🎯 Highlights v1.13.1](#-highlights-v1131)
 - [🎯 Highlights v1.13.0](#-highlights-v1130)
 - [🎯 Highlights v1.12.9](#-highlights-v1129)
@@ -50,6 +56,12 @@
 - [🎯 Highlights v1.11.0](#-highlights-v1110)
 - [🎯 Highlights v1.10.0](#-highlights-v1100)
 - [?? Detailed Changelog](#-detailed-changelog)
+  - [1.15.4 — Window Title Dynamic Version (Title + About + Diagnostics)](#1154--window-title-dynamic-version-title--about--diagnostics)
+  - [1.15.3 — MCP HUD Action Buttons (Lime Launch + Red Shutdown)](#1153--mcp-hud-action-buttons-lime-launch--red-shutdown)
+  - [1.15.2 — MCP HUD Redesign (No-Overlap Layout + Centered Buttons + ES/EN/PT)](#1152--mcp-hud-redesign-no-overlap-layout--centered-buttons--esenpt)
+  - [1.15.1 — MCP Control HUD (Window Menu + Fail-Closed Plugins)](#1151--mcp-control-hud-window-menu--fail-closed-plugins)
+  - [1.15.0 — MCP Server (Claude/Codex/OpenCode Control)](#1150--mcp-server-claudecodexopencode-control)
+  - [1.14.0 — Planner Architect P0 — ver RELEASE_NOTES.md](#1140--planner-architect-p0-civic-prefabs--decorationpass)
   - [1.13.1 — New Map Void Parity (No Sea Seed)](#1131--new-map-void-parity-no-sea-seed)
   - [1.13.0 — FullMap Scanner UI + AreaGen Certified Walls](#1130--fullmap-scanner-ui--areagen-certified-walls)
   - [1.12.9 — Outfit Channels Glued to Color Table](#1129--outfit-channels-glued-to-color-table)
@@ -108,6 +120,12 @@
 | **Planner FullMap Knowledge** | 🟢 Implemented v1.13.0 (`FullMapScanner` + SQLite publisher + UI) |
 | **AreaGen Towns/Dungeons/Walls** | 🟢 Implemented v1.13.0 (street grid + door gaps + corridor doorways + certified walls) |
 | **New Map Void** | 🟢 RME parity v1.13.1 (empty map, no seeded ground — `GUI::NewMap`) |
+| **Planner Architect P0** | 🟢 Implemented v1.14.0 (detalle en `RELEASE_NOTES.md`) |
+| **MCP Server (Claude/Codex/OpenCode)** | 🟢 Implemented v1.15.0 (`--mcp-server` stdio + 11 `legacyx_*` tools + real UI bridge + `--validate-mcp`) |
+| **MCP Control HUD + Fail-Closed Plugins** | 🟢 Implemented v1.15.1 (`Window → MCP Control HUD` + `McpServerController` + `PluginManifestService` sha256-gated, single runtime) |
+| **MCP HUD Redesign (visible + i18n)** | 🟢 Implemented v1.15.2 (no-overlap `TableLayout` cards + `LegacyXFixed` centered buttons + 26 keys ES/EN/PT + `--validate-mcp-hud-layout`) |
+| **MCP HUD Action Buttons** | 🟢 Implemented v1.15.3 (owner-drawn lime Launch + red Shutdown, white outlined text + shadow, bitmap-verified) |
+| **Window Title Dynamic Version** | 🟢 Implemented v1.15.4 (`ProductInfo.AppVersion`/`DisplayTitle` — title, About and diagnostics read the assembly) |
 
 ---
 
@@ -115,6 +133,237 @@
 
 
 
+
+## 🎯 Highlights v1.15.4
+
+<table>
+<tr>
+<td width="25%" align="center">
+
+### 🪟
+**Título vivo**
+
+`LegacyX Editor Version 1.15.4` desde el assembly — nunca hardcodeado
+
+</td>
+<td width="25%" align="center">
+
+### ℹ️
+**About fiel**
+
+`Version ... for Windows` con el número real del build
+
+</td>
+<td width="25%" align="center">
+
+### 🩺
+**Reportes con versión**
+
+Diagnósticos `version 1.15.4` en `report-*.json` + título post-import
+
+</td>
+<td width="25%" align="center">
+
+### ✅
+**Sin regresión**
+
+Validators PASS — OTBM, bridge, router, Planner e idiomas intactos
+
+</td>
+</tr>
+</table>
+
+```diff
++ SharpMapTracker/ProductInfo.cs: AppVersion (assembly 1.15.4 → ToString(3), fallback "Alpha") + DisplayTitle — causa: DisplayName const "Version Alpha" pintado en título, About y reportes
++ SharpMapTracker/MainForm.cs:298/:2814/:545 + AboutWindow.cs:30 → DisplayTitle/AppVersion; SharpMapTracker.csproj → 1.15.4
++ Versión 1.15.4.0 — LegacyXEditor.dll (3,227,648 bytes) — build Release 0 errores, 10 warnings preexistentes (5 únicos ×2, no introducidos)
+```
+
+## 🎯 Highlights v1.15.3
+
+<table>
+<tr>
+<td width="25%" align="center">
+
+### 🟢
+**Iniciar lima**
+
+Fondo `(56,200,60)` constante — inmune a los 3 tematizadores globales
+
+</td>
+<td width="25%" align="center">
+
+### 🔴
+**Detener rojo**
+
+Fondo `(200,45,45)` — hover/pressed/disabled propios + foco teclado
+
+</td>
+<td width="25%" align="center">
+
+### ✍️
+**Texto delineado**
+
+Blanco con contorno negro 4px + sombra — centrado, legible en ES/EN/PT
+
+</td>
+<td width="25%" align="center">
+
+### 🖼️
+**Bitmap-verified**
+
+El validator renderiza (`DrawToBitmap`) y exige base + blanco + negro reales
+
+</td>
+</tr>
+</table>
+
+```diff
++ SharpMapTracker/UI/McpControlHudForm.cs: McpHudActionButton anidado (UserPaint: fondo sólido + borde negro 2px + texto GraphicsPath blanco/contorno negro + sombra + estados hover/pressed/disabled + focus cue) — causa: LegacyXTheme.Apply (Idle, sin excepción LegacyXFixed) repintaba todo botón en oscuro+dorado
++ Versión 1.15.3.0 — LegacyXEditor.dll (3,227,648 bytes) — build Release 0 errores, 10 warnings preexistentes (5 únicos ×2, no introducidos)
+```
+
+## 🎯 Highlights v1.15.2
+
+<table>
+<tr>
+<td width="25%" align="center">
+
+### 🖼️
+**Sin solapes**
+
+Tarjetas `TableLayout` (header 28 + body %) — fin del `Dock.Top/Fill` que tapaba títulos y recortaba botones
+
+</td>
+<td width="25%" align="center">
+
+### 🔘
+**Botones centrados**
+
+`Tag LegacyXFixed` (opt-out del Hook) + `MiddleCenter` + anclados/responsive — dorado y oscuro intactos
+
+</td>
+<td width="25%" align="center">
+
+### 🌐
+**ES/EN/PT en vivo**
+
+26 claves `dialog.mcpHud.*` + item `menu.window.mcpHud` — `LanguageManager` + `LanguageChanged` sin tocar OTBM
+
+</td>
+<td width="25%" align="center">
+
+### ✅
+**Validator propio**
+
+`--validate-mcp-hud-layout` (STA headless): claves ×3 idiomas, 4 botones, cero solapes, columnas/combo/audit
+
+</td>
+</tr>
+</table>
+
+```diff
++ SharpMapTracker/UI/McpControlHudForm.cs (reescrito): root TableLayout (header 56 + contenido) + MakeCard TableLayout por tarjeta + status grid 2 cols (info + Launch/Shutdown Dock.Fill) + permiso 2 filas fijas + plugins con botones apilados (inmunes al ancho) + min 840x620
++ Data/Lang/{es,en,pt}.json (+26 claves c/u): dialog.mcpHud.* (títulos, botones, hint, columnas, estados, permisos) + menu.window.mcpHud; botones con Name=clave (Tag reservado al Hook-guard) + combo/estados/columnas dinámicos + MessageBox traducidos
++ SharpMapTracker/UI/MainForm.McpHud.cs: RegisterItem(menu.window.mcpHud) — el item Window se traduce con ApplyTo
++ Program.cs: --validate-mcp-hud-layout (ret 45) — STA sin mostrar: 26 claves × es/en/pt + 4 botones (texto/centrado/guard/clave/cabida ×3 idiomas en mínimo y default) + cero solapes entre hermanos + combo/columnas/audit
++ Versión 1.15.2.0 — LegacyXEditor.dll (3,224,064 bytes) — build Release 0 errores, 10 warnings preexistentes (5 únicos ×2, no introducidos)
+```
+
+## 🎯 Highlights v1.15.1
+
+<table>
+<tr>
+<td width="25%" align="center">
+
+### 🪟
+**MCP Control HUD**
+
+`Window → MCP Control HUD` — Launch/Shutdown, estado, auditoría y permisos sin tocar OTBM
+
+</td>
+<td width="25%" align="center">
+
+### 🧩
+**Fail-Closed Plugins**
+
+`plugins/**/plugin.json` — solo `Verified` (`sha256`) carga; sin hash o entry ausente → `Blocked`
+
+</td>
+<td width="25%" align="center">
+
+### 🧵
+**Single Runtime**
+
+Sin 2º `.exe` — `LegacyX.Mcp.csproj` no integrado; el HUD corre en proceso sobre el bridge real
+
+</td>
+<td width="25%" align="center">
+
+### ✅
+**Sin regresión**
+
+`--validate-mcp/areagen/animator/diagnostics` PASS — open/save/export OTBM intactos
+
+</td>
+</tr>
+</table>
+
+```diff
++ SharpMapTracker/Mcp/Hosting/ (nuevo, mismo assembly, cero dependencias): McpServerController.cs (Launch/Shutdown, audit 500, Transport STDIO + Protocol 2024-11-05) + PluginManifestService.cs (Refresh/TryLoad fail-closed, sha256 obligatorio, entry verificado)
++ SharpMapTracker/UI/McpControlHudForm.cs (nuevo, verbatim lote x1): SERVER STATUS + PERMISSIONS (Observe/Propose/Approve) + AUDIT CONSOLE + PLUGINS — tema LegacyX dark, singleton ShowOrFocus
++ SharpMapTracker/UI/MainForm.McpHud.cs (nuevo partial): InitMcpServices/EnsureWindowMenuMcpItem/OpenMcpControlHud/ShutdownMcpSafe; MainForm.cs +2 líneas (Init en constructor tras Diagnostic Console, Shutdown en FormClosed — best-effort, nunca bloquea salida)
++ Versión 1.15.1.0 — LegacyXEditor.dll (3,214,848 bytes) — build Release 0 errores, 10 warnings preexistentes (5 únicos ×2, no introducidos)
+```
+
+## 🎯 Highlights v1.15.0
+
+<table>
+<tr>
+<td width="25%" align="center">
+
+### 🛰️
+**MCP Stdio Server**
+
+`--mcp-server` en el proceso UI — `initialize` + `tools/list` + `tools/call` JSON-RPC para Claude/Codex/OpenCode
+
+</td>
+<td width="25%" align="center">
+
+### 🧰
+**11 Tools**
+
+`policy|session_status|map_status|list_towns|begin_town_edit|planner_design|propose_edit|approve|reject|apply|redo`
+
+</td>
+<td width="25%" align="center">
+
+### 🌉
+**Real UI Bridge**
+
+Diseño vía `ArchitectBrain.Trace` + apply vía `PlannerMaterializer` + ediciones vía `BrushRegistry` — 1 batch atómica
+
+</td>
+<td width="25%" align="center">
+
+### ✅
+**Policy Gates**
+
+Solo IDs OTB 10.98, town name+id, una capa por paso, approve→apply — `--validate-mcp` permanente
+
+</td>
+</tr>
+</table>
+
+```diff
++ SharpMapTracker/Mcp/ (nuevo, mismo assembly, sin dependencias, sin 2º proceso): fundación x1 verbatim + Bridge/LegacyXAppBridge.cs (bridge real) + McpServerHost.cs + --mcp-server + --validate-mcp
++ Program.cs + MainForm.cs (accessor TibiaItems, 1 línea) · LegacyX.Mcp.csproj NO integrado como 2º .exe (single-runtime)
++ Validacion: build 0 errores · --validate-mcp + --validate-areagen + --validate-animator + --validate-diagnostics PASS
+```
+
+## 🎯 Highlights v1.14.0
+
+> Detalle completo en `RELEASE_NOTES.md` (este archivo quedó en v1.13.1 y se retoma en v1.15.0): **Planner Architect P0** — `CivicPrefabCatalog` + `PrefabStamp` + `DecorationPass` + `TraceFromDesign`.
 
 ## 🎯 Highlights v1.13.1
 
@@ -1259,6 +1508,177 @@ No more white popups
 
 
 
+
+### <span style="color:#00D084">●</span> 1.15.4 — Window Title Dynamic Version (Title + About + Diagnostics)
+
+> **Objetivo:** la ventana mostraba **`LegacyX Editor Version Alpha`** (const `ProductInfo.DisplayName`) en el título inicial, en el título post-import (`"{mapa} - …"`) y en el diálogo About — y los reportes de diagnóstico sellaban `version "Alpha"`. Ahora título, About y reportes leen la **versión real del assembly** (`1.15.4`) vía `ProductInfo.AppVersion`/`DisplayTitle`, con fallback al const si la lectura falla. Sin tocar OTBM, bridge, router, Planner, renderers ni idiomas.
+
+<details open>
+<summary><b>🪟 Causa — const `DisplayName` vs versión del assembly</b></summary>
+
+- `SharpMapTracker/ProductInfo.cs:8-9` — `Version = "Alpha"` + `DisplayName = Name + " Version " + Version` (const, nunca numérico).
+- `MainForm.cs:298` (`Text = ProductInfo.DisplayName` en el constructor) contradecía el comentario de `:271` ("keep only app name, no hardcoded version") y el fix dinámico 1.11.0 (que solo escribía a `Debug` en `:275-276`); `:2814` repetía el const tras importar mapa; `AboutWindow.cs:30` y el heartbeat de diagnóstico (`MainForm.cs:545`, `Constants.MAP_TRACKER_VERSION`) sellaban `"Alpha"` en UI y `report-*.json`.
+- Los bytes del exe/dll ya eran 1.15.3 — el defecto era solo la superficie visible, no el build.
+
+</details>
+
+<details open>
+<summary><b>🔧 Fix — `AppVersion`/`DisplayTitle` dinámicos</b></summary>
+
+- **`ProductInfo.cs` (nuevo):** `AppVersion` — `Assembly.GetExecutingAssembly().GetName().Version?.ToString(3)` con `try/catch` + fallback al const; `DisplayTitle => Name + " Version " + AppVersion`. Consts originales intactos (headers de `settings.cfg` y compat sin cambios).
+- **`MainForm.cs:298` / `:2814` / `:545` + `AboutWindow.cs:30`:** título inicial, título post-import, About (`Version … for Windows`) y evento `Startup` de diagnóstico ahora usan `DisplayTitle`/`AppVersion`.
+- **`SharpMapTracker.csproj`:** `1.15.3` → `1.15.4` (`Version`/`AssemblyVersion`/`FileVersion` + `Description`).
+- **Antes/después:** antes — `LegacyX Editor Version Alpha` en barra, About y reportes; ahora — `LegacyX Editor Version 1.15.4` en los tres, y `report-*.json` con `"application": "1.15.4.0"` verificado en vivo.
+- **Paridad RME:** `hampusborgos/rme/source` (`about_window.cpp`) muestra la versión en About — la versión dinámica del assembly preserva esa intención; extensión sucesora sin reclamo de paridad nueva; ninguna otra fuente externa usada.
+
+</details>
+
+<details>
+<summary><b>✅ Validación 1.15.4</b></summary>
+
+| Comando | Resultado |
+| :--- | :--- |
+| `dotnet build -c Release --no-restore` | 0 errores · `LegacyXEditor.dll 1.15.4.0` (3,227,648 bytes) · 10 warnings preexistentes (5 únicos ×2, no introducidos) |
+| `--validate-mcp-hud-layout` / `--validate-mcp` / `--validate-areagen` / `--validate-animator` / `--validate-diagnostics` | PASS (botones+claves ES/EN/PT / 11 tools+gates / fase 17 / async+ping-pong / report JSON con `"application": "1.15.4.0"`) |
+| `--validate-client / render / brush-engine / planner-core` | No ejecutables aquí (requieren carpeta Tibia 10.98, no disponible en esta máquina) |
+| OTBM open/save/export | Sin modificar (`OtMap`/`OtFileReader`/`GuiService`/`MapTabPage` intactos); solo superficies de versión |
+
+</details>
+
+### <span style="color:#00D084">●</span> 1.15.3 — MCP HUD Action Buttons (Lime Launch + Red Shutdown)
+
+> **Objetivo:** pintar `Iniciar` en **verde limón** y `Detener` en **rojo**, con texto **blanco de borde negro y sombra**, inmunes a los tematizadores globales (el `LegacyXTheme.Apply` en `Idle` repintaba todo botón en oscuro+dorado sin respetar `LegacyXFixed`): subclase owner-drawn `McpHudActionButton` (`UserPaint`) con estados propios — sin tocar OTBM, bridge, router, Planner ni idiomas.
+
+<details open>
+<summary><b>🎨 Causa — 3 tematizadores vs botones custom</b></summary>
+
+- `LegacyXStyles.Hook` respeta `Tag LegacyXFixed`, pero `ThemeManager.ApplyTheme` y `LegacyXTheme.Apply` (este último en `Application.Idle`, sin excepciones) repintan **todo** `Button` abierto: fondo oscuro + texto dorado + `AutoSize` — el HUD 1.15.2 amanecía decolorado (verificado en screenshot del reporte).
+- Con `UserPaint` el pintado ignora `BackColor/ForeColor/FlatAppearance`; el `Tag LegacyXFixed` se conserva para bloquear además el `AutoSize/Margin` del Hook. `Dock.Fill` en celdas `TableLayout` fija la geometría.
+
+</details>
+
+<details open>
+<summary><b>🔧 Fix — McpHudActionButton (UserPaint, solo Iniciar/Detener)</b></summary>
+
+- **Iniciar:** base `(56,200,60)` lima · hover `(80,220,85)` · pressed `(35,155,45)`; **Detener:** base `(200,45,45)` · hover `(225,75,75)` · pressed `(150,30,30)`; borde negro 2px; deshabilitado gris `(85,85,90)` + texto `(160,160,160)`.
+- **Texto:** `GraphicsPath.AddString` centrado, contorno negro 4px (`LineJoin.Round`) + relleno blanco + sombra `(2,2)` alfa 130; cue de foco punteado blanco para teclado. `Refresh/Cargar` intactos (diseño oscuro/dorado 1.15.2).
+- **Idiomas intactos:** misma clave en `Name`, mismo `ApplyLanguage`; el validator mide cabida con la fuente viva en ES/EN/PT.
+- **Antes/después:** antes — 4 botones oscuro+dorado del tema global; ahora — Iniciar lima y Detener rojo con blanco delineado, siempre.
+- **Paridad RME:** `hampusborgos/rme/source` no especifica HUD MCP — extensión sucesora sin reclamo de paridad; ninguna otra fuente externa usada.
+
+</details>
+
+<details>
+<summary><b>✅ Validación 1.15.3</b></summary>
+
+| Comando | Resultado |
+| :--- | :--- |
+| `dotnet build -c Release --no-restore` | 0 errores · `LegacyXEditor.dll 1.15.3.0` (3,227,648 bytes) · 10 warnings preexistentes (5 únicos ×2, no introducidos) |
+| `--validate-mcp-hud-layout` (ret 45, extendido) | PASS anterior + asserts de pintura: `DrawToBitmap` exige base lima/roja (±40) + píxeles blancos y negros reales en ambos botones y tamaños |
+| `--validate-mcp` / `--validate-areagen` / `--validate-animator` / `--validate-diagnostics` | PASS (11 tools + gates / fase 17 / async+ping-pong / report JSON) |
+| `--validate-client / render / brush-engine / planner-core` | No ejecutables aquí (requieren carpeta Tibia 10.98, no disponible en esta máquina) |
+| OTBM open/save/export | Sin modificar (`OtMap`/`OtFileReader`/`GuiService`/`MapTabPage` intactos); solo UI del HUD |
+
+</details>
+
+### <span style="color:#00D084">●</span> 1.15.2 — MCP HUD Redesign (No-Overlap Layout + Centered Buttons + ES/EN/PT)
+
+> **Objetivo:** reparar el HUD reportado (títulos `SERVER STATUS`/`PERMISSIONS`/`AUDIT CONSOLE` tapando contenido, botones `Launch/Shutdown` recortados, botón `Load verified` invisible, textos solo en inglés): reescritura del layout sin pares `Dock.Top/Dock.Fill`, botones de diseño fijo con texto siempre centrado y traducción viva ES/EN/PT por las reglas del repo (`LanguageManager` + `LegacyXFixed` + `Data/Lang/*.json`) — sin tocar OTBM, bridge, router ni Planner.
+
+<details open>
+<summary><b>🖼️ Causa — trampa Dock.Top/Dock.Fill + Hook restyle</b></summary>
+
+- **Solape:** `MakeCard` añadía el header (`Dock.Top 28`) y luego el body (`Dock.Fill`) — el `Fill` cubría todo el cliente incluido el header → `STOPPED`, primera línea del audit y botones quedaban bajo/detrás del título; `Load verified` se envolvía fuera de su fila de 40px. Patrón idéntico al bug `SendToBack/BringToFront` del NPC Maker.
+- **Recorte+decolorado:** `LegacyXStyles.Hook` (Idle/1500 ms) re-tematiza todo `Button` abierto: fondo gris + `AutoSize GrowAndShrink` — destruía los botones dorados y sus tamaños de diseño.
+- **Idioma:** cero claves `dialog.mcpHud.*`; combo/estados/columnas/`MessageBox` hardcodeados en inglés.
+- **Archivo:** `SharpMapTracker/UI/McpControlHudForm.cs` reescrito (mismos controles, misma conducta con controller/plugins).
+
+</details>
+
+<details open>
+<summary><b>🔧 Fix — TableLayout + LegacyXFixed + 26 claves ×3 idiomas</b></summary>
+
+- **Layout:** root `TableLayout` (header 56 + contenido %) + `MakeCard` como `TableLayout` (header `Absolute 28` + body `Percent 100`) — imposible solapar por construcción; status en grid 2 cols (info + `Launch/Shutdown` en `Dock.Fill` siempre visibles); permiso en 2 filas fijas (34 modo+combo / 24 hint con `AutoEllipsis`); plugins con botones apilados verticales (inmunes al ancho en cualquier idioma); mínimo `840×620`, default `900×670`.
+- **Botones (regla repo `LegacyXStyles`):** `Tag = "LegacyXFixed"` (opt-out del Hook — preserva dorado/oscuro y tamaño) + `TextAlign MiddleCenter` explícito; la clave de idioma viaja en `Name` (el `Tag` está reservado al guard) y `ApplyLanguage` fija el texto manualmente.
+- **Idiomas:** 26 claves `dialog.mcpHud.*` + `menu.window.mcpHud` en `Data/Lang/{es,en,pt}.json` (títulos, botones, hint, columnas, estados `DETENIDO/…`, permisos `Observar/…`); estáticos por `Tag` + `ApplyTo`, combo/estados/columnas/`MessageBox` dinámicos; `LanguageChanged` reaplica en vivo con unsubscribe en `FormClosed`; líneas de audit intactas (rutas/protocolo exactos, sin traducir).
+- **Menú:** `MainForm.McpHud.cs` — `RegisterItem(menu.window.mcpHud)` (se traduce con el `ApplyTo` existente de `MainForm`).
+- **Antes/después:** antes — títulos sobre el contenido, botones en tiras, `Load verified` ausente, todo inglés; ahora — todo visible, 4 botones centrados, ES/EN/PT en vivo.
+- **Paridad RME:** `hampusborgos/rme/source` no especifica HUD MCP — extensión sucesora sin reclamo de paridad; ninguna otra fuente externa usada.
+
+</details>
+
+<details>
+<summary><b>✅ Validación 1.15.2</b></summary>
+
+| Comando | Resultado |
+| :--- | :--- |
+| `dotnet build -c Release --no-restore` | 0 errores · `LegacyXEditor.dll 1.15.2.0` (3,224,064 bytes) · 10 warnings preexistentes (5 únicos ×2, no introducidos) |
+| `--validate-mcp-hud-layout` (nuevo, permanente, ret 45) | PASS 26 claves × es/en/pt + 4 botones (texto/centrado/guard/clave/cabida ×3 idiomas en mínimo 840 y default 900) + cero solapes + combo/columnas/audit |
+| `--validate-mcp` / `--validate-areagen` / `--validate-animator` / `--validate-diagnostics` | PASS (11 tools + gates / fase 17 / async+ping-pong / report JSON) |
+| `--validate-client / render / brush-engine / planner-core` | No ejecutables aquí (requieren carpeta Tibia 10.98, no disponible en esta máquina) |
+| OTBM open/save/export | Sin modificar (`OtMap`/`OtFileReader`/`GuiService`/`MapTabPage` intactos); HUD solo lee `plugins/` y pinta UI |
+
+</details>
+
+### <span style="color:#00D084">●</span> 1.15.1 — MCP Control HUD (Window Menu + Fail-Closed Plugins)
+
+> **Objetivo:** exponer el servidor MCP del lote `x1` en la UI sin romper nada: un HUD bajo `Window → MCP Control HUD` (Launch/Shutdown, estado STDIO `2024-11-05`, auditoría en vivo, permisos `Observe/Propose/Approve`, panel de plugins fail-closed con gate `sha256`) corriendo **en el mismo proceso WinForms** — cero toques a apertura/grabado/exportación OTBM, Brush Engine, renderers o Planner.
+
+<details open>
+<summary><b>🪟 HUD + Hosting — ficheros nuevos (lote x1 en proceso)</b></summary>
+
+- **`SharpMapTracker/Mcp/Hosting/McpServerController.cs` (nuevo):** ciclo `Stopped→Starting→Running→Error`, `LaunchAsync` en `Task.Run` con `launchGeneration` anti-raza (usa `LegacyX.Mcp.exe` externo si existe; si no —caso normal single-runtime— marca Running lógico en proceso **sin secuestrar el stdio** del loop real `--mcp-server`), `Shutdown` con timeout 4 s + kill del árbol, `Dispose` que frena watchdog/restart, auditoría capada a 500 entradas con `Truncate`, `Permission` con aviso honesto de que el enforcement mutante vive en `router/policy`.
+- **`SharpMapTracker/Mcp/Hosting/McpProcessIsolation.cs` (nuevo, lote x1):** `McpProcessIsolation` (exe hijo `BelowNormal` sin priority-boost + soft WS ≤ 256 MB + `DOTNET_GCHeapHardLimit`, solo si el exe existe), `McpWatchdog` (health, fallos consecutivos, máx. 5 restarts/hora con backoff) y `McpMemoryGuard` (WARN 1 GB / HARD 1.5 GB — HARD rechaza `Launch` con mensaje claro para proteger UI/OTBM). `RequireOutOfProcess=false` por defecto: sin exe publicado el HUD conserva el Running en proceso certificado (el `true` del lote exigiría un exe + IPC que no existen).
+- **`SharpMapTracker/Mcp/Hosting/PluginManifestService.cs` (nuevo):** `Refresh` sobre `plugins/**/plugin.json + *.manifest.json`; `VerifyFailClosed` exige `sha256` + entry existente + hash coincidente (mismatch → `Blocked`, nunca se ejecuta); `TryLoad` solo transiciona `Verified→Loaded`; `AllowUnsigned=false` por defecto. Solo toca la carpeta `plugins/` — OTBM y editor intactos.
+- **`SharpMapTracker/UI/McpControlHudForm.cs` (nuevo, verbatim x1):** `ShowOrFocus` singleton, tarjetas `SERVER STATUS` (dot gris/ámbar/verde/rojo) + `PERMISSIONS` (`Observe/Propose/Approve`) + `AUDIT CONSOLE` + `PLUGINS` (`Refresh manifests` / `Load verified`), tema LegacyX dark, `BeginInvoke` en eventos del controller.
+- **`SharpMapTracker/UI/MainForm.McpHud.cs` (nuevo partial):** `InitMcpServices` (crea controller+plugins, `Refresh` tolerante) + `EnsureWindowMenuMcpItem` (reusa `windowMenuItem`, añade separador + `MCP Control HUD`) + `OpenMcpControlHud` + `ShutdownMcpSafe`. **`MainForm.cs` +2 líneas:** `InitMcpServices()` tras el item `Diagnostic Console`; `ShutdownMcpSafe()` al inicio de `MainForm_FormClosed` (nunca bloquea la salida).
+- **`LegacyX.Mcp.csproj` + `Program.cs` del lote NO integrados:** segundo `.exe` prohibido por la política single-runtime (`AGENTS.md`); el hosting en proceso reutiliza `McpServerHost` + `LegacyXAppBridge` certificados de v1.15.0.
+- **Paridad RME:** `hampusborgos/rme/source` no especifica servidor MCP/HUD/plugins — extensión sucesora sin reclamo de paridad; ninguna otra fuente externa usada.
+
+</details>
+
+<details>
+<summary><b>✅ Validación 1.15.1</b></summary>
+
+| Comando | Resultado |
+| :--- | :--- |
+| `dotnet build -c Release --no-restore` | 0 errores · `LegacyXEditor.dll 1.15.1.0` (3,214,848 bytes) · 10 warnings preexistentes (5 únicos ×2, no introducidos) |
+| `--validate-mcp` (bin + `Release-Tmp`) | PASS `initialize` + 11 tools + gates + `-32601` + `-32700` |
+| `--validate-areagen` / `--validate-animator` / `--validate-diagnostics` | PASS (fase 17 / async+ping-pong / report JSON) |
+| `--validate-client / render / brush-engine / planner-core` | No ejecutables aquí (requieren carpeta Tibia 10.98, no disponible en esta máquina) |
+| OTBM open/save/export | Sin modificar (`OtMap`/`OtFileReader`/`GuiService`/`MapTabPage` intactos); HUD/Hosting no tocan tiles |
+
+</details>
+
+### <span style="color:#00D084">●</span> 1.15.0 — MCP Server (Claude/Codex/OpenCode Control)
+
+> **Objetivo:** permitir que **Claude, Codex, OpenCode** controlen LegacyX por **stdio JSON-RPC (MCP tools)**: inspeccionar el mapa, diseñar con el Planner y editar por pasos con aprobación — solo IDs OTB 10.98, town name+id, una capa por propuesta, `propose → approve → apply`. Servidor **en el proceso UI** (single-runtime, sin IPC inventado).
+
+<details open>
+<summary><b>🛰️ Servidor MCP en proceso — SharpMapTracker/Mcp/ (nuevo) + Program.cs + MainForm.cs</b></summary>
+
+- **Fundación x1 verbatim** (`LegacyX.Mcp.*`, cero dependencias): `Bridge/ILegacyXBridge.cs`, `Policy/PlannerMcpPolicy.cs`, `Protocol/McpStdioHost.cs`, `Tools/McpSession.cs`, `Tools/McpToolRouter.cs` (11 tools `legacyx_*`); hardening `-32700/-32602`.
+- **`Bridge/LegacyXAppBridge.cs` (nuevo):** bridge real marshado al hilo UI — `ArchitectBrain.Trace` (defaults de combos UI) + `PlannerMaterializer.ApplyApproved` (1 batch + undo/redo) + ediciones `BrushRegistry` (Terrain/Road/Floor/Nature/Decoration) con `Equivalent` espejo de `PlannerMaterializer:628`; `IsOfficialItemId` estricto contra `items.otb` (`OtItems.GetItem:147`).
+- **`McpServerHost.cs` + `--mcp-server` + `--validate-mcp`** en `Program.cs`; `MainForm.cs`: accessor `TibiaItems` (1 línea). `LegacyX.Mcp.csproj` NO integrado como 2º `.exe`.
+- **Paridad RME:** `source/` no especifica MCP — extensión sucesora sin reclamo de paridad; ninguna otra fuente externa usada.
+
+</details>
+
+<details>
+<summary><b>✅ Validación 1.15.0</b></summary>
+
+| Comando | Resultado |
+| :--- | :--- |
+| `dotnet build -c Release --no-restore` | 0 errores · `LegacyXEditor.dll 1.15.0.0` (3,180,544 bytes) · sin warnings nuevos |
+| `--validate-mcp` (nuevo) | PASS `initialize` + 11 tools + gates + `-32601` + `-32700` + `ping` |
+| `--validate-areagen` / `--validate-animator` / `--validate-diagnostics` | PASS |
+| `--validate-client / render / brush-engine / planner-core` | Requieren carpeta Tibia 10.98 (no disponible aquí) |
+
+</details>
+
+### <span style="color:#00D084">●</span> 1.14.0 — Planner Architect P0 (Civic Prefabs + DecorationPass)
+
+> Detalle completo en `RELEASE_NOTES.md`: prefabs cívicos + `DecorationPass` + `TraceFromDesign` (este archivo se retoma en v1.15.0).
 
 ### <span style="color:#00D084">●</span> 1.13.1 — New Map Void Parity (No Sea Seed)
 
@@ -2508,6 +2928,12 @@ int baseX = tileX*32 - tileOffset;
 | **v1.12.9** | **Outfit Channels Glued to Color Table** | **26/Auto/44/Percent — tabla 154px natural + canales justo debajo + ChannelsGluedToTable** |
 | **v1.13.0** | **FullMap Scanner UI + AreaGen Certified Walls** | **FullMapScannerForm + fullmap_* publisher + street grid/door gaps/doorways + CreateDefaultForBiome(catalog) walls** |
 | **v1.13.1** | **New Map Void Parity (No Sea Seed)** | **GuiService.NewMap vacío RME (0 tiles) + status "Created new map" + helpers sea eliminados** |
+| **v1.14.0** | **Planner Architect P0 (detalle en RELEASE_NOTES.md)** | **CivicPrefabCatalog + PrefabStamp + DecorationPass + TraceFromDesign** |
+| **v1.15.0** | **MCP Server (Claude/Codex/OpenCode Control)** | **Mcp/ en proceso + bridge real + --mcp-server + --validate-mcp + policy gates** |
+| **v1.15.1** | **MCP Control HUD (Window Menu + Fail-Closed Plugins)** | **Window → MCP Control HUD + McpServerController + PluginManifestService sha256 + single runtime** |
+| **v1.15.2** | **MCP HUD Redesign (No-Overlap + Centered + i18n)** | **TableLayout cards + LegacyXFixed buttons + 26 claves ES/EN/PT + --validate-mcp-hud-layout** |
+| **v1.15.3** | **MCP HUD Action Buttons (Lime + Red)** | **McpHudActionButton UserPaint + texto blanco delineado + bitmap-verified** |
+| **v1.15.4** | **Window Title Dynamic Version (Title + About + Diagnostics)** | **ProductInfo.AppVersion/DisplayTitle + MainForm:298/:2814/:545 + AboutWindow:30 + csproj 1.15.4** |
 
 <div align="center">
 
@@ -2603,10 +3029,12 @@ Friend-all, wildcard, zilch, super, clear_borders/friends XML-order, optional-on
 | **D3D11 Recovery** | `--validate-d3d11-recovery` | Device Removed/Reset | ✅ PASS |
 | **Planner Catalog** | `--validate-planner-catalog` | `496 families` `10.98` SPR | ✅ PASS |
 | **Planner Core** | `--validate-planner-core` | Blueprint → single BatchAction | ✅ PASS |
+| **MCP Server** | `--validate-mcp` | `initialize/tools-list/tools-call`, 11 tools, gates, `-32601/-32700` | ✅ PASS |
+| **MCP HUD Layout** | `--validate-mcp-hud-layout` | 26 keys × ES/EN/PT, 4 centered buttons fit all langs, zero sibling overlap, combo/columns/audit | ✅ PASS |
 
 <div style="background: #1a1a2e; padding: 12px; border-radius: 6px; border-left: 4px solid #00D084; color: #eaeaea;">
 
-**Build gate:** `dotnet build SharpMapTracker/SharpMapTracker.csproj -c Release --no-restore` � **0 Errores** (10 advertencias preexistentes = 5 únicas ×2, no introducidas por 1.13.1) � `LegacyXEditor.dll 1.13.1.0`
+**Build gate:** `dotnet build SharpMapTracker/SharpMapTracker.csproj -c Release --no-restore` � **0 Errores** (10 advertencias preexistentes = 5 únicas ×2, no introducidas por 1.15.0) � `LegacyXEditor.dll 1.15.0.0`
 
 </div>
 
